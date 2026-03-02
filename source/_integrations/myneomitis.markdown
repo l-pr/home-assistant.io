@@ -4,6 +4,8 @@ description: Connect the MyNeomitis devices (radiators, towel rails, relays, und
 ha_category:
   - Select
   - Climate
+  - Energy
+  - Sensor
 ha_release: 2026.3
 ha_iot_class: Cloud Push
 ha_config_flow: true
@@ -13,6 +15,7 @@ ha_domain: myneomitis
 ha_platforms:
   - select
   - climate
+  - sensor
 ha_integration_type: hub
 ---
 
@@ -76,6 +79,22 @@ The **MyNeomitis** integration provides the following entities:
   - **Description**: Controls whether underfloor heating operates in heating or cooling mode.
   - **Options**: `Heating`, `Cooling`
   - **Available for devices**: UFH devices
+
+### Sensors
+
+- **Energy consumption** (`sensor`)
+  - **Description**: Tracks the cumulative energy consumed by a device since the integration was first set up.
+  - **Device class**: Energy
+  - **Unit**: kWh
+  - **State class**: `total_increasing`
+  - **Available for devices**: All devices reporting a `consumption` value.
+
+- **NTC temperature probe** (`sensor`)
+  - **Description**: Reports the temperature measured by one of up to three NTC probes connected to a device.
+  - **Device class**: Temperature
+  - **Unit**: °C
+  - **Probes**: Up to three probes per device (`ntc0`, `ntc1`, `ntc2`), created automatically for each probe present in the device state.
+  - **Available for devices**: Devices reporting `ctnType` and at least one `ntcXTemp` value in their state (for example, Myneo Link and compatible controllers).
 
 ## Data updates
 
